@@ -15,8 +15,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssortmentEditService", "As
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderProcessingService", "OrderProcessingService\OrderProcessingService.csproj", "{5CE69BFE-A11D-4243-8321-2FC64184CE77}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{F1937612-B873-495C-BDF5-52AB009791EF}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseModels", "DatabaseModels\DatabaseModels.csproj", "{C4AE36E8-5627-46B1-8111-38A7FAE493B5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggingService", "LoggingService\LoggingService.csproj", "{1460B0A1-1FE3-45C2-BF4F-D8B1AEEEBCC6}"
@@ -51,10 +49,6 @@ Global
 		{5CE69BFE-A11D-4243-8321-2FC64184CE77}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5CE69BFE-A11D-4243-8321-2FC64184CE77}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5CE69BFE-A11D-4243-8321-2FC64184CE77}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F1937612-B873-495C-BDF5-52AB009791EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F1937612-B873-495C-BDF5-52AB009791EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F1937612-B873-495C-BDF5-52AB009791EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F1937612-B873-495C-BDF5-52AB009791EF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C4AE36E8-5627-46B1-8111-38A7FAE493B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C4AE36E8-5627-46B1-8111-38A7FAE493B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4AE36E8-5627-46B1-8111-38A7FAE493B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
