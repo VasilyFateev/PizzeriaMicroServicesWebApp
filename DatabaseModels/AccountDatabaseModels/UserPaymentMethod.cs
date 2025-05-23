@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace AccountsModelClasses
+namespace DatabaseModels.AccountDatabaseModels
 {
 	[Table("user_payment_method")]
 	public class UserPaymentMethod

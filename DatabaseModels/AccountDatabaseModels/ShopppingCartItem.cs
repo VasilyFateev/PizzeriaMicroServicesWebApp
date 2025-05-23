@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace AccountsModelClasses
+namespace DatabaseModels.AccountDatabaseModels
 {
 	[Table("shopping_cart_item")]
 	public class ShopppingCartItem

@@ -1,7 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace AccountsModelClasses
+namespace DatabaseModels.AccountDatabaseModels
 {
 	[Table("adress")]
 	public class Adress

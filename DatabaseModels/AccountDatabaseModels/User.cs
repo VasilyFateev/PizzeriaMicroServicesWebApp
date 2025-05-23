@@ -2,11 +2,11 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace AccountsModelClasses
+namespace DatabaseModels.AccountDatabaseModels
 {
 	[Table("user")]
-	[Index("email", "hashed_passsword", IsUnique = true, Name = "ix_user_email_hashed_password")]
-	[Index("phone_number", "hashed_passsword", IsUnique = true, Name = "ix_user_phone_number_hashed_password")]
+	[Index(nameof(Email), nameof(HashedPassword), IsUnique = true, Name = "ix_user_email_hashed_password")]
+	[Index(nameof(PhoneNumber), nameof(HashedPassword), IsUnique = true, Name = "ix_user_phone_number_hashed_password")]
 	public class User
 	{
 		#region Properties
