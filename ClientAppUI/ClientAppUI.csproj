@@ -4,12 +4,11 @@
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>4958ddb0-ab70-4a83-8363-d47c633089b1</UserSecretsId>
+    <UserSecretsId>22e2414e-8df0-40e7-a6d0-f76dc66e82f1</UserSecretsId>
     <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MassTransit.RabbitMQ" Version="8.4.1" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.22.1-Preview.1" />
     <PackageReference Include="RabbitMQ.Client" Version="7.1.2" />
   </ItemGroup>

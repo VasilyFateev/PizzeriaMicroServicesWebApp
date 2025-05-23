@@ -1,5 +1,4 @@
-﻿using IdentityService.Interfaces;
-using IdentityService.ServiceComponents;
+﻿using IdentityService.ServiceComponents;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IdentityService.Controllers
