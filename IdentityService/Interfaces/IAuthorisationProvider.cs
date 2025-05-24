@@ -1,7 +1,10 @@
-﻿namespace IdentityService.Interfaces
+﻿using API;
+using API.ClientWebAppIdentityService;
+
+namespace IdentityService.Interfaces
 {
 	internal interface IAuthorisationProvider
 	{
-		public Task<IResult> AuthorizeAsync();
+		public Task<ServiceResponse<AuthResponce>> AuthorizeAsync(string providedLogin, string providedPassword);
 	}
 }

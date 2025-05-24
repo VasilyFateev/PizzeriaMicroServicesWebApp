@@ -1,15 +1,55 @@
+using ClientAppUI.RequestSenders;
+using MassTransit;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddSingleton<AuthRequestSenderService>();
+
+builder.Services.AddMassTransit(x =>
+{
+	x.UsingRabbitMq((context, cfg) =>
+	{
+		cfg.Host("localhost", "/", h =>
+		{
+			h.Username("guest");
+			h.Password("guest");
+		});
+
+		cfg.ConfigureEndpoints(context);
+	});
+});
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+	.AddJwtBearer(options =>
+	{
+		options.TokenValidationParameters = new TokenValidationParameters
+		{
+			ValidateIssuer = true,
+			ValidIssuer = "Vessel",
+			ValidateAudience = true,
+			ValidAudience = "VesselPizzeria",
+			ValidateLifetime = true,
+			ValidateIssuerSigningKey = true,
+			IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("qH3sOV3f0ZNfXD5eMb5JL+if2LXX4/IAhVxqMZ6Z5K3Q1+KnrXEMUmxOREMRb1lj"))
+		};
+	});
+
+builder.Services.AddAntiforgery(options =>
+{
+	options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+});
+
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
 	app.UseExceptionHandler("/Home/Error");
-	// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
 	app.UseHsts();
 }
 
