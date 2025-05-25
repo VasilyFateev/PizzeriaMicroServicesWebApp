@@ -4,11 +4,11 @@ using IdentityService.Interfaces;
 
 namespace IdentityService.Consumers
 {
-	internal class RegConsumer : IConsumer<RegRequest>
+	public class RegConsumer : IConsumer<RegRequest>
 	{
 		private readonly IRegistrationProvider _provider;
 
-		internal RegConsumer(IRegistrationProvider registrationProvider)
+		public RegConsumer(IRegistrationProvider registrationProvider)
 		{
 			_provider = registrationProvider;
 		}

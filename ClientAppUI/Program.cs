@@ -8,13 +8,14 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
-builder.Services.AddSingleton<AuthRequestSenderService>();
+builder.Services.AddScoped<AuthRequestSenderService>();
+builder.Services.AddScoped<RegRequestSenderService>();
 
 builder.Services.AddMassTransit(x =>
 {
 	x.UsingRabbitMq((context, cfg) =>
 	{
-		cfg.Host("localhost", "/", h =>
+		cfg.Host("rabbitmq", "/", h =>
 		{
 			h.Username("guest");
 			h.Password("guest");

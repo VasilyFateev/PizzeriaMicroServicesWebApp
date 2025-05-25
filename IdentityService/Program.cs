@@ -6,16 +6,21 @@ using MassTransit;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddSingleton<IAuthorisationProvider, DefaultAuthorisationService>();
-builder.Services.AddSingleton<IRegistrationProvider, DefaultRegistrateService>();
-builder.Services.AddSingleton<IJwtTokenGenerator, DefaultJwtTokenGenerator>();
+builder.Services.AddScoped<IAuthorisationProvider, DefaultAuthorisationService>();
+builder.Services.AddScoped<IRegistrationProvider, DefaultRegistrateService>();
+builder.Services.AddScoped<IJwtTokenGenerator, DefaultJwtTokenGenerator>();
+
+builder.Services.AddScoped<AuthConsumer>();
+builder.Services.AddScoped<RegConsumer>();
+
 builder.Services.AddMassTransit(x =>
 {
 	x.AddConsumer<AuthConsumer>();
+	x.AddConsumer<RegConsumer>();
 
 	x.UsingRabbitMq((context, cfg) =>
 	{
-		cfg.Host("localhost", "/", h =>
+		cfg.Host("rabbitmq", "/", h =>
 		{
 			h.Username("guest");
 			h.Password("guest");
@@ -33,5 +38,5 @@ builder.Services.AddMassTransit(x =>
 	});
 });
 
-var app = builder.Build();
+ var app = builder.Build();
 app.Run();

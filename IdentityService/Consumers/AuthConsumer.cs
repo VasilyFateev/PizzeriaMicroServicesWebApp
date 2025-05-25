@@ -4,11 +4,11 @@ using IdentityService.Interfaces;
 
 namespace IdentityService.Consumers
 {
-	internal class AuthConsumer : IConsumer<AuthRequest>
+	public class AuthConsumer : IConsumer<AuthRequest>
 	{
 		private readonly IAuthorisationProvider _provider;
 
-		internal AuthConsumer(IAuthorisationProvider authorisationProvider)
+		public AuthConsumer(IAuthorisationProvider authorisationProvider)
 		{
 			_provider = authorisationProvider;
 		}

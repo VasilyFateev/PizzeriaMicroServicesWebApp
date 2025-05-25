@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>7e693036-1ad0-4c90-85ae-e752d8d8801c</UserSecretsId>
-    <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
@@ -28,10 +28,6 @@
     <ProjectReference Include="..\API\API.csproj" />
     <ProjectReference Include="..\DatabaseModels\DatabaseModels.csproj" />
     <ProjectReference Include="..\DatabasesAccess\DatabasesAccess.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Новая папка\" />
   </ItemGroup>
 
 </Project>

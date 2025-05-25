@@ -3,7 +3,7 @@ using API.ClientWebAppIdentityService;
 
 namespace IdentityService.Interfaces
 {
-	internal interface IAuthorisationProvider
+	public interface IAuthorisationProvider
 	{
 		public Task<ServiceResponse<AuthResponce>> AuthorizeAsync(string providedLogin, string providedPassword);
 	}
