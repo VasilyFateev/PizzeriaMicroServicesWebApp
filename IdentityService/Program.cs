@@ -1,10 +1,18 @@
+using DatabasesAccess.AccountDb;
 using IdentityService.Consumers;
 using IdentityService.Interfaces;
 using IdentityService.ServiceComponents;
 using IdentityService.Utils;
 using MassTransit;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<AccountContext>(options =>
+{
+	var connectionString = builder.Configuration.GetConnectionString("AccountDb");
+	options.UseNpgsql(connectionString);
+});
 
 builder.Services.AddScoped<IAuthorisationProvider, DefaultAuthorisationService>();
 builder.Services.AddScoped<IRegistrationProvider, DefaultRegistrateService>();

@@ -26,7 +26,7 @@ services:
     networks:
       - app-network
     environment:
-      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_ENVIRONMENT: Production
 
   identityservice:
     build:
@@ -38,21 +38,33 @@ services:
       - "8051:8051"
     depends_on:
       - rabbitmq
-      - db
+      - accountdb
     networks:
       - app-network
     environment:
-      ASPNETCORE_ENVIRONMENT: Development
-      ConnectionStrings__DefaultConnection: "Host=db;Port=5432;Username=master;Password=mypassword;Database=accountsdb"
+      ASPNETCORE_ENVIRONMENT: Production
 
-  db:
+  accountdb:
     image: postgres:15
     environment:
-      POSTGRES_USER: myuser
+      POSTGRES_USER: master
       POSTGRES_PASSWORD: mypassword
-      POSTGRES_DB: mydatabase
+      POSTGRES_DB: accountsdb
     ports:
-      - "5432:5432"
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  assortmentdb:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: master
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: assortmentdb
+    ports:
+      - "5434:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
     networks:
@@ -67,7 +79,8 @@ services:
     ports:
       - "5050:80"
     depends_on:
-      - db
+      - accountdb
+      - assortmentdb
     networks:
       - app-network
 

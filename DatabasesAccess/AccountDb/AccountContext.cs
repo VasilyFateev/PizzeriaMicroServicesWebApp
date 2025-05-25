@@ -1,22 +1,20 @@
-﻿using AuthorizationService;
-using DatabaseModels.AccountDatabaseModels;
+﻿using DatabaseModels.AccountDatabaseModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace DatabasesAccess.AccountDb
 {
 	public class AccountContext : DbContext
 	{
+		public AccountContext(DbContextOptions options) : base(options) { }
+		public AccountContext() { }
+
 		public DbSet<User> Users { get; set; }
 		public DbSet<Adress> Adresses { get; set; }
 		public DbSet<UserAdress> AdressesAdresses { get; set; }
 		public DbSet<ShopppingCart> Carts { get; set; }
 		public DbSet<ShopppingCartItem> ShopppingCartItems { get; set; }
-		public DbSet <UserPaymentMethod> PaymentMethods { get; set; }
+		public DbSet<UserPaymentMethod> PaymentMethods { get; set; }
 
-		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-		{
-			optionsBuilder.UseNpgsql(AccountDatabaseConnectionString.ConnectionString);
-		}
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.Entity<User>()

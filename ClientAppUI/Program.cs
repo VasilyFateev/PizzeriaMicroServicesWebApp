@@ -6,6 +6,7 @@ using System.Text;
 
 
 var builder = WebApplication.CreateBuilder(args);
+var rabbitMqHost = builder.Configuration["RabbitMq:Host"];
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<AuthRequestSenderService>();
@@ -15,7 +16,7 @@ builder.Services.AddMassTransit(x =>
 {
 	x.UsingRabbitMq((context, cfg) =>
 	{
-		cfg.Host("rabbitmq", "/", h =>
+		cfg.Host(rabbitMqHost, "/", h =>
 		{
 			h.Username("guest");
 			h.Password("guest");
