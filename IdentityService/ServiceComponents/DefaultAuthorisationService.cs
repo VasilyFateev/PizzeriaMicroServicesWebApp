@@ -12,14 +12,14 @@ namespace IdentityService.ServiceComponents
 		public async Task<ServiceResponse<AuthResponce>> AuthorizeAsync(string providedLogin, string providedPassword)
 		{
 			if (string.IsNullOrEmpty(providedLogin) || string.IsNullOrEmpty(providedPassword))
-				return new ServiceResponse<AuthResponce>() { StatusCode = StatusCodes.Status401Unauthorized };
+				return new ServiceResponse<AuthResponce>(StatusCodes.Status401Unauthorized, string.Empty, null);
 
 			bool isEmail = RegexCollection.EmailRegex().Match(providedLogin).Success;
 			bool isPhone = RegexCollection.PhoneRegex().Match(providedLogin).Success;
 
 			if (!isEmail && !isPhone)
 			{
-				return new ServiceResponse<AuthResponce>() { StatusCode = StatusCodes.Status401Unauthorized };
+				return new ServiceResponse<AuthResponce>(StatusCodes.Status401Unauthorized, string.Empty, null);
 			}
 
 			using AccountContext context = new();
@@ -27,7 +27,7 @@ namespace IdentityService.ServiceComponents
 			var user = await context.Users.FirstOrDefaultAsync(u => (isEmail ? u.Email : u.PhoneNumber) == providedLogin);
 			if (user == null)
 			{
-				return new ServiceResponse<AuthResponce>() { StatusCode = StatusCodes.Status401Unauthorized };
+				return new ServiceResponse<AuthResponce>(StatusCodes.Status401Unauthorized, string.Empty, null);
 			}
 
 			var hashedPassword = PasswordHasher.GetHashedPassword(user, providedPassword);
@@ -35,15 +35,11 @@ namespace IdentityService.ServiceComponents
 			{
 
 				var token = jwtTokenGenerator.GetToken(providedLogin);
-				return new ServiceResponse<AuthResponce>()
-				{
-					StatusCode = StatusCodes.Status200OK,
-					Data = new AuthResponce(token)
-				};
+				return new ServiceResponse<AuthResponce>(StatusCodes.Status200OK, string.Empty, new AuthResponce(token));
 			}
 			else
 			{
-				return new ServiceResponse<AuthResponce>() { StatusCode = StatusCodes.Status401Unauthorized };
+				return new ServiceResponse<AuthResponce>(StatusCodes.Status401Unauthorized, string.Empty, null);
 			}
 		}
 	}

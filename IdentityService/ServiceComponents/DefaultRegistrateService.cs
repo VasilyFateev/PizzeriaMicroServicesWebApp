@@ -13,16 +13,16 @@ namespace IdentityService.ServiceComponents
 		public async Task<ServiceResponse<AuthResponce>> RegistrateAsync(string providedLogin, string providedPassword)
 		{
 			if (string.IsNullOrEmpty(providedLogin))
-				return new ServiceResponse<AuthResponce>() { StatusCode = StatusCodes.Status400BadRequest };
+				return new ServiceResponse<AuthResponce>(StatusCodes.Status400BadRequest, string.Empty, null);
 
 			if (string.IsNullOrEmpty(providedPassword))
-				return new ServiceResponse<AuthResponce>() { StatusCode = StatusCodes.Status400BadRequest };
+				return new ServiceResponse<AuthResponce>(StatusCodes.Status400BadRequest, string.Empty, null);
 
 			return providedLogin switch
 			{
 				string when RegexCollection.EmailRegex().IsMatch(providedLogin) => await RegistrateWithEmailAsync(providedLogin, providedPassword),
 				string when RegexCollection.PhoneRegex().IsMatch(providedLogin) => await RegistrateWithPhoneAsync(providedLogin, providedPassword),
-				_ => new ServiceResponse<AuthResponce>() { StatusCode = StatusCodes.Status400BadRequest }
+				_ => new ServiceResponse<AuthResponce>(StatusCodes.Status400BadRequest, string.Empty, null)
 			};
 
 			async Task<ServiceResponse<AuthResponce>> RegistrateWithEmailAsync(string providedEmail, string providedPassword)
@@ -31,7 +31,7 @@ namespace IdentityService.ServiceComponents
 				var sameUser = await context.Users.FirstOrDefaultAsync(u => u.Email == providedEmail);
 				if (sameUser != null)
 				{
-					return new ServiceResponse<AuthResponce>() { StatusCode = StatusCodes.Status409Conflict };
+					return new ServiceResponse<AuthResponce>(StatusCodes.Status409Conflict, string.Empty, null);
 				}
 				var user = new User
 				{
@@ -42,11 +42,7 @@ namespace IdentityService.ServiceComponents
 				await context.SaveChangesAsync();
 
 				var token = jwtTokenGenerator.GetToken(providedEmail);
-				return new ServiceResponse<AuthResponce>()
-				{
-					StatusCode = StatusCodes.Status200OK,
-					Data = new AuthResponce(token)
-				};
+				return new ServiceResponse<AuthResponce>(StatusCodes.Status200OK, string.Empty, new AuthResponce(token));
 			}
 
 			async Task<ServiceResponse<AuthResponce>> RegistrateWithPhoneAsync(string providedPhone, string providedPassword)
@@ -55,7 +51,7 @@ namespace IdentityService.ServiceComponents
 				var sameUser = await context.Users.FirstOrDefaultAsync(u => u.PhoneNumber == providedPhone);
 				if (sameUser != null)
 				{
-					return new ServiceResponse<AuthResponce>() { StatusCode = StatusCodes.Status409Conflict };
+					return new ServiceResponse<AuthResponce>(StatusCodes.Status409Conflict, string.Empty, null);
 				}
 				var user = new User
 				{
@@ -66,11 +62,7 @@ namespace IdentityService.ServiceComponents
 				await context.SaveChangesAsync();
 
 				var token = jwtTokenGenerator.GetToken(providedPhone);
-				return new ServiceResponse<AuthResponce>()
-				{
-					StatusCode = StatusCodes.Status200OK,
-					Data = new AuthResponce(token)
-				};
+				return new ServiceResponse<AuthResponce>(StatusCodes.Status200OK, string.Empty, new AuthResponce(token));
 			}
 		}
 	}

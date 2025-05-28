@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AccountContext>(options =>
 {
 	var connectionString = builder.Configuration.GetConnectionString("AccountDb");
-	options.UseNpgsql(connectionString);
+	options.UseNpgsql();
 });
 
 builder.Services.AddScoped<IAuthorisationProvider, DefaultAuthorisationService>();
@@ -46,5 +46,5 @@ builder.Services.AddMassTransit(x =>
 	});
 });
 
- var app = builder.Build();
+var app = builder.Build();
 app.Run();

@@ -11,6 +11,9 @@
 *.sln.docstates
 *DatabaseConnectionString.cs
 AuthOptions.cs
+appsettings.json
+appsettings.*.json
+
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
