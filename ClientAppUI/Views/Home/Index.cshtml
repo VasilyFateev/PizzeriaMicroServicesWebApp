@@ -1,0 +1,10 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    @Html.AntiForgeryToken()
+    <a asp-controller="Identity" asp-action="Auth" >Auth</a>
+    <a asp-controller="Identity" asp-action="Reg">Reg</a>
+    <a asp-controller="Identity" asp-action="Ping">Ping</a>
+</div>
