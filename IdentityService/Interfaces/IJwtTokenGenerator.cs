@@ -1,4 +1,4 @@
-﻿namespace IdentityService.Utils
+﻿namespace IdentityService.Interfaces
 {
 	public interface IJwtTokenGenerator
 	{

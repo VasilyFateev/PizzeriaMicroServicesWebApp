@@ -5,6 +5,6 @@ namespace IdentityService.Interfaces
 {
 	public interface IRegistrationProvider
 	{
-		public Task<ServiceResponse<AuthResponce>> RegistrateAsync(string providedLogin, string providedPassword);
+		public Task<ServiceResponse<RegResponce>> RegistrateAsync(string providedName, string providedLogin, string providedPassword);
 	}
 }

@@ -3,6 +3,8 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    @Html.AntiForgeryToken()
+    <a asp-controller="Identity" asp-action="Auth" >Auth</a>
+    <a asp-controller="Identity" asp-action="Reg">Reg</a>
+    <a asp-controller="Identity" asp-action="Ping">Ping</a>
 </div>

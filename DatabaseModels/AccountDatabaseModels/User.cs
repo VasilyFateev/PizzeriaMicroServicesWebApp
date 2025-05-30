@@ -5,8 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace DatabaseModels.AccountDatabaseModels
 {
 	[Table("user")]
-	[Index(nameof(Email), nameof(HashedPassword), IsUnique = true, Name = "ix_user_email_hashed_password")]
-	[Index(nameof(PhoneNumber), nameof(HashedPassword), IsUnique = true, Name = "ix_user_phone_number_hashed_password")]
+	[Index(nameof(Email), IsUnique = true, Name = "ix_user_email")]
+	[Index(nameof(PhoneNumber), IsUnique = true, Name = "ix_user_phone_number")]
 	public class User
 	{
 		#region Properties
@@ -21,13 +21,13 @@ namespace DatabaseModels.AccountDatabaseModels
 
 		[Column("phone_number")]
 		[Phone(ErrorMessage = "Не корректный номер телефона")]
-		public string PhoneNumber { get; set; } = default!;
+		public string? PhoneNumber { get; set; }
 
 		[Column("email")]
 		[EmailAddress(ErrorMessage = "Не корректный адресс электронной почты")]
 		public string? Email { get; set; }
 
-		[Column("hashed_passsword")]
+		[Column("hashed_password")]
 		public string HashedPassword { get; set; } = default!;
 		#endregion
 
