@@ -10,9 +10,10 @@
 *.userosscache
 *.sln.docstates
 *DatabaseConnectionString.cs
+appsettings.Development.json
+appsettings.Production.json
 AuthOptions.cs
 appsettings.json
-appsettings.*.json
 
 
 # User-specific files (MonoDevelop/Xamarin Studio)
@@ -366,3 +367,4 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/StorefrontService/appsettings.Development.json

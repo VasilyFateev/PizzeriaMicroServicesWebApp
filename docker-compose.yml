@@ -50,6 +50,22 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Development
 
+  storefrontservice:
+    build:
+      context: .
+      dockerfile: StorefrontService/Dockerfile
+    container_name: storefrontservice
+    ports:
+      - "8060:8060"
+      - "8061:8061"
+    depends_on:
+      - rabbitmq
+      - assortmentdb
+    networks:
+      - app-network
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+
   accountdb:
     image: postgres:15
     environment:
