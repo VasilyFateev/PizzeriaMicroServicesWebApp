@@ -1,5 +1,5 @@
 ﻿namespace API.StorefrontService
 {
 	public record AssortmentListRequest();
-	public record ProductInfoRequest(long ProductId);
+	public record ProductDetalisationRequest(long ProductId);
 }

@@ -1,0 +1,55 @@
+﻿@model API.StorefrontService.Models.AssortmentList
+
+@if (Model.Categories == null || !Model.Categories.Any())
+{
+	<div class="empty-assortment">
+		<p>Ассортимент временно недоступен</p>
+	</div>
+}
+else
+{
+	int desktopColumns = 4;
+
+	@foreach (var category in Model.Categories)
+	{
+		<div class="category-section mb-5">
+			<h2 class="category-header mb-4">@category.Name</h2>
+
+			<div class="product-grid" style="grid-template-columns: repeat(@desktopColumns, minmax(0, 1fr));">
+                @foreach (var product in category.Products)
+                {
+                    <div class="product-card" data-product-id="@product.Id">
+                        <div class="product-image-container" onclick="openProductModal(@product.Id)">
+                            <img src="@(product.ImageLink ?? "/images/placeholder.png")"
+                                 alt="@product.Name"
+                                 class="product-image"
+                                 loading="lazy" />
+                        </div>
+
+                        <div class="product-info">
+                            <h3 class="product-name">@product.Name</h3>
+                            @if (!string.IsNullOrEmpty(product.Description))
+                            {
+                                <p class="product-description">@product.Description</p>
+                            }
+                            <div class="price-button-container">
+                                @if (product.Price.HasValue)
+                                {
+                                    <span class="product-price">От @product.Price.Value.ToString("0") руб.</span>
+                                }
+                                <button class="select-button" onclick="openProductModal(@product.Id)">
+                                    Выбрать
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                }
+			</div>
+		</div>
+	}
+}
+
+@section Scripts {
+    <script src="~/js/storefront/assortment.js"></script>
+	<link rel="stylesheet" href="~/css/storefront/assortment.css" />
+}

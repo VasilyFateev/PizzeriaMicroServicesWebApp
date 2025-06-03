@@ -4,10 +4,10 @@ using StorefrontService.Interfaces;
 
 namespace StorefrontService.Consumers
 {
-	public class ProductInfoConsumer(IProductItemConfiguratorBuilder builder) : IConsumer<ProductInfoRequest>
+	public class ProductDetalisationConsumer(IProductDetalisationBuilder builder) : IConsumer<ProductDetalisationRequest>
 	{
-		private readonly IProductItemConfiguratorBuilder _builder = builder;
-		public async Task Consume(ConsumeContext<ProductInfoRequest> context)
+		private readonly IProductDetalisationBuilder _builder = builder;
+		public async Task Consume(ConsumeContext<ProductDetalisationRequest> context)
 		{
 			try
 			{
@@ -17,7 +17,7 @@ namespace StorefrontService.Consumers
 			}
 			catch (Exception ex)
 			{
-				Console.WriteLine($"Error in {typeof(ProductInfoConsumer)}: {ex.Message}");
+				Console.WriteLine($"Error in {typeof(ProductDetalisationConsumer)}: {ex.Message}");
 				if (ex.InnerException != null)
 					Console.WriteLine($"Inner exception: {ex.InnerException.Message}");
 				throw;

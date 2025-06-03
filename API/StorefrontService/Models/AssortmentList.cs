@@ -3,8 +3,19 @@
 	public class AssortmentList
 	{
 		public List<Category> Categories { get; set; } = [];
-
-		public record Category(long Id, string Name, List<Product> Products);
-		public record Product(long Id, string Name, string? Description, string? ImageLink, decimal? Price);
+		public class Category
+		{
+			public long Id { get; set; }
+			public string Name { get; set; }
+			public List<Product> Products { get; set; } = [];
+		}
+		public class Product
+		{
+			public long Id { get; set; }
+			public string Name { get; set; }
+			public string? Description { get; set; }
+			public string? ImageLink { get; set; }
+			public decimal? Price { get; set; }
+		}
 	}
 }

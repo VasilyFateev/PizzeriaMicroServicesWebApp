@@ -1,5 +1,7 @@
 using API.ClientWebAppIdentityService;
-using ClientAppUI.RequestSenders;
+using API.StorefrontService;
+using ClientAppUI.RequestSenders.IdentityService;
+using ClientAppUI.RequestSenders.StorefrontService;
 using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -16,15 +18,26 @@ builder.Logging.AddSimpleConsole(options =>
 	options.UseUtcTimestamp = true;
 }).SetMinimumLevel(LogLevel.Debug);
 
-builder.Services.AddControllersWithViews(); 
+builder.Services.AddControllersWithViews();
+
+// Identity Service
 builder.Services.AddScoped<PingRequestSenderService>();
 builder.Services.AddScoped<AuthRequestSenderService>();
 builder.Services.AddScoped<RegRequestSenderService>();
 
+// Storefront Service
+builder.Services.AddScoped<AssortmentListRequestSenderService>();
+builder.Services.AddScoped<ProductDetalisationRequestSenderService>();
+
 builder.Services.AddMassTransit(x =>
 {
+	// Identity Service
 	x.AddRequestClient<AuthRequest>(new Uri("queue:auth-queue"));
 	x.AddRequestClient<RegRequest>(new Uri("queue:reg-queue"));
+
+	// Storefront Service
+	x.AddRequestClient<AssortmentListRequest>(new Uri("queue:assortment-list-queue"));
+	x.AddRequestClient<ProductDetalisationRequest>(new Uri("queue:product-detalisation-queue"));
 
 	x.UsingRabbitMq((context, cfg) =>
 	{

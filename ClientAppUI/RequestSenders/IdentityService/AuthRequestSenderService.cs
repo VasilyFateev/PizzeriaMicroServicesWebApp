@@ -2,7 +2,7 @@
 using MassTransit;
 using API;
 
-namespace ClientAppUI.RequestSenders
+namespace ClientAppUI.RequestSenders.IdentityService
 {
 	public class AuthRequestSenderService(IRequestClient<AuthRequest> requestClient)
 	{

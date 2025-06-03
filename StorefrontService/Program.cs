@@ -14,15 +14,15 @@ builder.Services.AddDbContext<AssortmentContext>(options =>
 });
 
 builder.Services.AddScoped<IAssortmentListBuilder, AssortmentListBuilderV1>();
-builder.Services.AddScoped<IProductItemConfiguratorBuilder, ProductItemConfiguratorBuilderV1>();
+builder.Services.AddScoped<IProductDetalisationBuilder, ProductDetalisationBuilderV1>();
 
 builder.Services.AddScoped<AssortmentListConsumer>();
-builder.Services.AddScoped<ProductInfoConsumer>();
+builder.Services.AddScoped<ProductDetalisationConsumer>();
 
 builder.Services.AddMassTransit(x =>
 {
 	x.AddConsumer<AssortmentListConsumer>();
-	x.AddConsumer<ProductInfoConsumer>();
+	x.AddConsumer<ProductDetalisationConsumer>();
 
 	x.UsingRabbitMq((context, cfg) =>
 	{
@@ -37,9 +37,9 @@ builder.Services.AddMassTransit(x =>
 			e.ConfigureConsumer<AssortmentListConsumer>(context);
 		});
 
-		cfg.ReceiveEndpoint("product-item-configuration-queue", e =>
+		cfg.ReceiveEndpoint("product-detalisation-queue", e =>
 		{
-			e.ConfigureConsumer<ProductInfoConsumer>(context);
+			e.ConfigureConsumer<ProductDetalisationConsumer>(context);
 		});
 	});
 });

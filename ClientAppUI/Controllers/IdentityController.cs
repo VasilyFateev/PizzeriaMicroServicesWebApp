@@ -1,5 +1,5 @@
 ﻿using ClientAppUI.Models.Identity;
-using ClientAppUI.RequestSenders;
+using ClientAppUI.RequestSenders.IdentityService;
 using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,6 +1,7 @@
-﻿
+﻿using API.StorefrontService.Models;
+
 namespace API.StorefrontService
 {
-	public record AssortmentListResponce(Models.AssortmentList Assortment);
-	public record ProductInfoResponce(Models.ProductItemConfigurator ItemSelector);
+	public record AssortmentListResponce(AssortmentList? Assortment);
+	public record ProductDetalisationResponce(ProductDetalisation? ProductDetalisation);
 }

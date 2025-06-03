@@ -1,6 +1,6 @@
 ﻿namespace API.StorefrontService.Models
 {
-	public class ProductItemConfigurator
+	public class ProductDetalisation
 	{
 		public long Id { get; set; }
 		public string Name { get; set; }

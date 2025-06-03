@@ -1,0 +1,60 @@
+﻿@model ClientAppUI.Models.Storefront.ProductDetailViewModel
+
+<div class="product-modal" style="display: none;">
+	<div class="modal-overlay"></div>
+	<div class="modal-container">
+		<div class="modal-header">
+			<h3>@Model.Product.Name</h3>
+			<button class="close-modal">&times;</button>
+		</div>
+
+		<div class="modal-body">
+			<div class="product-image-container">
+				<img src="@(Model.SelectedItem?.ImageLink ?? "/images/placeholder.png")"
+					 alt="@Model.Product.Name"
+					 class="product-image" />
+			</div>
+
+			@if (!string.IsNullOrEmpty(Model.Product.Description))
+			{
+				<div class="product-description">
+					@Model.Product.Description
+				</div>
+			}
+
+			<div class="product-price">
+				@(Model.SelectedItem?.Price?.ToString("0") ?? "—") руб.
+			</div>
+
+			@foreach (var variation in Model.Product.Variations)
+			{
+				<div class="variation-section">
+					<h4>@variation.Name</h4>
+					<div class="option-grid">
+						@foreach (var option in variation.Options)
+						{
+							var isAvailable = Model.AvailableOptions.Contains(option.Id);
+							<div class="option-item @(isAvailable ? "" : "disabled")
+						                                          @(Model.SelectedOptions.Contains(option.Id) ? "selected" : "")"
+								 data-option-id="@option.Id"
+								 data-variation-id="@variation.Id">
+								@option.Name
+							</div>
+						}
+					</div>
+				</div>
+			}
+		</div>
+
+		<div class="modal-footer">
+			<button class="add-to-cart" disabled="@(!Model.IsCompleteSelection)">
+				Добавить в корзину за @(Model.SelectedItem?.Price?.ToString("0") ?? "0") руб.
+			</button>
+		</div>
+	</div>
+</div>
+
+
+@section Scripts {
+	<link rel="stylesheet" href="~/css/storefront/productdetail.css" />
+}
